@@ -57,3 +57,19 @@ LEFT JOIN Rides r
 GROUP BY u.id, u.name
 ORDER BY travelled_distance DESC, u.name ASC;
 
+1484. Group Sold Products By The Date
+
+SELECT
+    sell_date,
+    COUNT(product) AS num_sold,
+    STRING_AGG(product, ',') 
+        WITHIN GROUP (ORDER BY product) AS products
+FROM (
+    SELECT DISTINCT sell_date, product
+    FROM Activities
+) t
+GROUP BY sell_date
+ORDER BY sell_date;
+
+
+
